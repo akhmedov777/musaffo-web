@@ -100,45 +100,44 @@ function SirokCard({ flavor, lang }: { flavor: SirokFlavor; lang: Locale }) {
       </div>
 
       {/* Image area */}
-      <div className="relative h-[280px] flex items-center justify-center overflow-hidden">
-        {/* Open bar (behind, positioned to the right, revealed when wrapper slides) */}
+      <div
+        className="relative h-[320px] flex items-center justify-center overflow-hidden"
+        style={{ transform: "rotate(-12deg)" }}
+      >
+        {/* Open bar (behind — smooth chocolate side) */}
         <div
-          className="absolute inset-0 flex items-center justify-center"
+          className="absolute inset-0 flex items-center justify-center transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{
+            transform: isHovered ? "translateX(15%)" : "translateX(0%)",
+          }}
         >
           <Image
             src="/images/sirok-open.png"
             alt={flavor.name[lang]}
-            width={360}
-            height={200}
-            className="object-contain drop-shadow-2xl"
-            style={{
-              width: "90%",
-              height: "auto",
-              transform: "rotate(-90deg)",
-            }}
+            width={400}
+            height={240}
+            className="object-contain drop-shadow-2xl -rotate-90"
+            style={{ height: "80%", width: "auto" }}
           />
         </div>
 
-        {/* Closed bar (wrapper — slides left on hover like unwrapping) */}
+        {/* Closed bar (wrapper — clips from right like it's been torn open) */}
         <div
-          className="absolute inset-0 flex items-center justify-center z-10 transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="absolute inset-0 flex items-center justify-center z-10"
           style={{
-            transform: isHovered
-              ? "translateX(-30%) rotate(-6deg)"
-              : "translateX(0) rotate(0deg)",
+            clipPath: isHovered
+              ? "inset(0 40% 0 0)"
+              : "inset(0 0% 0 0)",
+            transition: "clip-path 0.7s cubic-bezier(0.16, 1, 0.3, 1)",
           }}
         >
           <Image
             src="/images/sirok-closed.png"
             alt={flavor.name[lang]}
-            width={360}
-            height={200}
-            className="object-contain drop-shadow-2xl"
-            style={{
-              width: "90%",
-              height: "auto",
-              transform: "rotate(-90deg)",
-            }}
+            width={400}
+            height={240}
+            className="object-contain drop-shadow-2xl -rotate-90"
+            style={{ height: "80%", width: "auto" }}
           />
         </div>
       </div>

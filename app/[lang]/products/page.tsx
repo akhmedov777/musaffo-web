@@ -1,18 +1,44 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
-import { categories, products } from "@/lib/products";
+import { ArrowLeft, X } from "lucide-react";
+import { categories, products, type Product } from "@/lib/products";
 import type { Locale } from "@/lib/i18n";
 
 export default function ProductsPage() {
   const params = useParams();
   const lang = (params.lang as Locale) || "uz";
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+
+  // Close panel on Escape key
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedProduct(null);
+    };
+    if (selectedProduct) {
+      document.body.style.overflow = "hidden";
+      window.addEventListener("keydown", handleKeyDown);
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedProduct]);
+
+  const getCategoryName = useCallback(
+    (categoryId: string) => {
+      const cat = categories.find((c) => c.id === categoryId);
+      return cat ? cat.name[lang] : categoryId;
+    },
+    [lang]
+  );
 
   const filteredProducts = activeCategory
     ? products.filter((p) => p.category === activeCategory)
@@ -120,6 +146,7 @@ export default function ProductsPage() {
             <div
               key={product.id}
               className="group cursor-pointer"
+              onClick={() => setSelectedProduct(product)}
             >
               {/* Product Image */}
               <div className="relative aspect-[3/4] overflow-hidden rounded-2xl bg-secondary">
@@ -185,6 +212,95 @@ export default function ProductsPage() {
             : "2026 MUSAFFO. Все права защищены."}
         </p>
       </div>
+
+      {/* Product Detail Slide-over */}
+      {selectedProduct && (
+        <div className="fixed inset-0 z-[60]">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-foreground/40 backdrop-blur-sm animate-in fade-in duration-200"
+            onClick={() => setSelectedProduct(null)}
+          />
+
+          {/* Panel */}
+          <div className="absolute right-0 top-0 bottom-0 w-full sm:w-[480px] md:w-[540px] bg-background shadow-2xl animate-in slide-in-from-right duration-300 flex flex-col">
+            {/* Close button */}
+            <button
+              type="button"
+              onClick={() => setSelectedProduct(null)}
+              className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-background/80 backdrop-blur-sm flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+            >
+              <X size={20} />
+            </button>
+
+            {/* Scrollable content */}
+            <div className="flex-1 overflow-y-auto">
+              {/* Product Image */}
+              <div className="relative aspect-[3/4] sm:aspect-[4/5] bg-secondary">
+                <Image
+                  src={selectedProduct.image}
+                  alt={selectedProduct.name[lang]}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                {/* Fat badge */}
+                <div className="absolute top-4 left-4">
+                  <span className="bg-background/90 backdrop-blur-sm text-foreground text-sm px-4 py-2 rounded-full font-medium">
+                    {fatLabel}: {selectedProduct.fat}
+                  </span>
+                </div>
+              </div>
+
+              {/* Product Info */}
+              <div className="px-6 py-8 sm:px-8">
+                {/* Category tag */}
+                <span className="inline-block text-xs uppercase tracking-widest text-muted-foreground mb-3">
+                  {getCategoryName(selectedProduct.category)}
+                </span>
+
+                <h2 className="font-display text-3xl md:text-4xl text-foreground tracking-tight">
+                  {selectedProduct.name[lang]}
+                </h2>
+
+                <p className="mt-4 text-base text-muted-foreground leading-relaxed">
+                  {selectedProduct.description[lang]}
+                </p>
+
+                {/* Details */}
+                <div className="mt-8 grid grid-cols-2 gap-4">
+                  <div className="bg-secondary rounded-2xl p-5">
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
+                      {fatLabel}
+                    </p>
+                    <p className="text-2xl font-display text-foreground">
+                      {selectedProduct.fat}
+                    </p>
+                  </div>
+                  <div className="bg-secondary rounded-2xl p-5">
+                    <p className="text-xs uppercase tracking-widest text-muted-foreground mb-1">
+                      {lang === "uz" ? "Og'irligi" : "Вес"}
+                    </p>
+                    <p className="text-2xl font-display text-foreground">
+                      {selectedProduct.weight}
+                    </p>
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <div className="mt-8">
+                  <a
+                    href="tel:+998781203334"
+                    className="block w-full text-center bg-foreground text-background px-8 py-4 rounded-full text-sm font-medium hover:opacity-80 transition-opacity"
+                  >
+                    {lang === "uz" ? "Buyurtma berish" : "Заказать"} — (+998) 78-120-33-34
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
