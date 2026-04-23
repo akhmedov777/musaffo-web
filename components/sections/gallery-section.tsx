@@ -78,7 +78,7 @@ export function GallerySection({ dict }: { dict: Dictionary["gallery"] }) {
     <section
       id="gallery"
       ref={galleryRef}
-      className="relative bg-background"
+      className="relative bg-transparent"
       style={{ height: sectionHeight }}
     >
       {/* Sticky container */}

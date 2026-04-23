@@ -14,7 +14,7 @@ const productImages = [
 
 export function CollectionSection({ dict }: { dict: Dictionary["collection"] }) {
   return (
-    <section id="accessories" className="bg-background">
+    <section id="accessories" className="bg-transparent">
       {/* Section Title */}
       <div className="px-6 py-20 md:px-12 lg:px-20 md:py-10">
         <h2 className="text-4xl font-display italic tracking-tight text-foreground md:text-5xl">

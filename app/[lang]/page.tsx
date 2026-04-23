@@ -21,7 +21,13 @@ export default async function Home({ params }: Props) {
   const dict = await getDictionary(lang);
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="relative isolate min-h-screen">
+      <div
+        className="pointer-events-none fixed inset-0 -z-20 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: "url('/images/background-image.jpg')" }}
+      />
+      <div className="pointer-events-none fixed inset-0 -z-10 bg-[rgba(232,238,244,0.78)] backdrop-blur-[2px]" />
+
       <Header dict={dict.header} lang={lang} />
       <HeroSection dict={dict.hero} />
       <PhilosophySection dict={dict.philosophy} />

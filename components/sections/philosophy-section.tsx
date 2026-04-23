@@ -47,7 +47,7 @@ export function PhilosophySection({ dict }: { dict: Dictionary["philosophy"] }) 
   }, [updateTransforms]);
 
   return (
-    <section id="products" className="bg-background">
+    <section id="products" className="bg-transparent">
       {/* Scroll-Animated Product Grid */}
       <div ref={sectionRef} className="relative" style={{ height: "200vh" }}>
         <div className="sticky top-0 h-screen flex items-center justify-center">

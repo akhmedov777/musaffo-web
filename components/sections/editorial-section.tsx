@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import type { Dictionary } from "@/dictionaries/types";
+import VideoPlayer from "@/components/ui/video-player";
 
 export function EditorialSection({ dict }: { dict: Dictionary["editorial"] }) {
   return (
-    <section className="bg-background">
+    <section className="bg-transparent">
       {/* Warm accent line */}
       <div className="h-px bg-gradient-to-r from-transparent via-[var(--brand-blue)] to-transparent" />
 
@@ -60,15 +61,10 @@ export function EditorialSection({ dict }: { dict: Dictionary["editorial"] }) {
         </div>
       </div>
 
-      {/* Full-width Video */}
-      <div className="relative aspect-[16/9] w-full md:aspect-[21/9]">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 h-full w-full object-cover"
-          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/bcdafadc-cb7e-4cb7-9cbf-edcbaf2360a5_1-cNBCz5fomcLRmm1cTXSBOKCq10VP91.mp4"
+      <div className="px-6 pb-20 md:px-12 md:pb-28 lg:px-20 lg:pb-32">
+        <VideoPlayer
+          poster="/images/musaffo-hero.jpg"
+          src="/videos/musaffo-video.mp4"
         />
       </div>
     </section>

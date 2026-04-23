@@ -5,7 +5,7 @@ import type { Dictionary } from "@/dictionaries/types";
 
 export function TestimonialsSection({ dict }: { dict: Dictionary["testimonials"] }) {
   return (
-    <section id="about" className="bg-background">
+    <section id="about" className="bg-transparent">
       {/* Large Text Statement */}
       <div className="px-6 py-24 md:px-12 md:py-32 lg:px-20 lg:py-40">
         <p className="mx-auto max-w-5xl text-2xl font-display leading-relaxed text-foreground md:text-3xl lg:text-[2.5rem] lg:leading-snug">

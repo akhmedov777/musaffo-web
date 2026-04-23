@@ -56,18 +56,18 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
   }, []);
 
   // Text fades out first (0 to 0.2)
-  const textOpacity = Math.max(0, 1 - (scrollProgress / 0.2));
+  const textOpacity = Math.max(0, 1 - scrollProgress / 0.2);
 
   // Image transforms start after text fades (0.2 to 1)
   const imageProgress = Math.max(0, Math.min(1, (scrollProgress - 0.2) / 0.8));
 
   // Smooth interpolations
-  const centerWidth = 100 - (imageProgress * 58);
-  const centerHeight = 100 - (imageProgress * 30);
+  const centerWidth = 100 - imageProgress * 58;
+  const centerHeight = 100 - imageProgress * 30;
   const sideWidth = imageProgress * 22;
   const sideOpacity = imageProgress;
-  const sideTranslateLeft = -100 + (imageProgress * 100);
-  const sideTranslateRight = 100 - (imageProgress * 100);
+  const sideTranslateLeft = -100 + imageProgress * 100;
+  const sideTranslateRight = 100 - imageProgress * 100;
   const borderRadius = imageProgress * 24;
   const gap = imageProgress * 16;
   const sideTranslateY = -(imageProgress * 15);
@@ -80,9 +80,8 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
           {/* Bento Grid Container */}
           <div
             className="relative flex h-full w-full items-stretch justify-center"
-            style={{ gap: `${gap}px`, padding: `${imageProgress * 16}px`, paddingBottom: `${60 + (imageProgress * 40)}px` }}
+            style={{ gap: `${gap}px`, padding: `${imageProgress * 16}px`, paddingBottom: `${60 + imageProgress * 40}px` }}
           >
-
             {/* Left Column */}
             <div
               className="flex flex-col will-change-transform"
@@ -93,7 +92,7 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
                 opacity: sideOpacity,
               }}
             >
-              {sideImages.filter(img => img.position === "left").map((img, idx) => (
+              {sideImages.filter((img) => img.position === "left").map((img, idx) => (
                 <div
                   key={idx}
                   className="relative overflow-hidden will-change-transform"
@@ -138,7 +137,7 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
                 <div className="text-center px-6">
                   <h1
                     className="text-5xl md:text-7xl lg:text-8xl font-display leading-tight tracking-tight text-white animate-[slideUp_0.8s_ease-out_forwards] opacity-0"
-                    style={{ animationDelay: '0.2s' }}
+                    style={{ animationDelay: "0.2s" }}
                   >
                     {dict.title}
                     <br />
@@ -146,7 +145,7 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
                   </h1>
                   <p
                     className="mt-4 text-base md:text-lg text-white/70 animate-[slideUp_0.8s_ease-out_forwards] opacity-0"
-                    style={{ animationDelay: '0.6s' }}
+                    style={{ animationDelay: "0.6s" }}
                   >
                     {dict.subtitle}
                   </p>
@@ -164,7 +163,7 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
                 opacity: sideOpacity,
               }}
             >
-              {sideImages.filter(img => img.position === "right").map((img, idx) => (
+              {sideImages.filter((img) => img.position === "right").map((img, idx) => (
                 <div
                   key={idx}
                   className="relative overflow-hidden will-change-transform"
@@ -182,7 +181,6 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
                 </div>
               ))}
             </div>
-
           </div>
         </div>
       </div>

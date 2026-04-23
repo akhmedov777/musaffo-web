@@ -14,7 +14,7 @@ const featureImages = [
 
 export function FeaturedProductsSection({ dict }: { dict: Dictionary["featuredProducts"] }) {
   return (
-    <section id="technology" className="bg-background">
+    <section id="technology" className="bg-transparent">
       {/* Section Title */}
       <div className="px-6 py-20 text-center md:px-12 md:py-28 lg:px-20 lg:py-32 lg:pb-20">
         <h2 className="text-4xl font-display tracking-tight text-foreground md:text-5xl lg:text-6xl">

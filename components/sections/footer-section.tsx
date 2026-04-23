@@ -11,7 +11,7 @@ const serviceHrefs = ["#", "#", "#", "#"];
 
 export function FooterSection({ dict, lang }: { dict: Dictionary["footer"]; lang: Locale }) {
   return (
-    <footer className="bg-background">
+    <footer className="bg-transparent">
       {/* Main Footer Content */}
       <div className="border-t border-border px-6 py-16 md:px-12 md:py-20 lg:px-20">
         <div className="grid grid-cols-2 gap-12 md:grid-cols-4 lg:grid-cols-5">
