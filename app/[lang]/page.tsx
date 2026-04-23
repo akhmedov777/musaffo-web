@@ -8,7 +8,6 @@ import { TechnologySection } from "@/components/sections/technology-section";
 import { GallerySection } from "@/components/sections/gallery-section";
 import { CollectionSection } from "@/components/sections/collection-section";
 import { SirokSection } from "@/components/sections/sirok-section";
-import { EditorialSection } from "@/components/sections/editorial-section";
 import { TestimonialsSection } from "@/components/sections/testimonials-section";
 import { FooterSection } from "@/components/sections/footer-section";
 
@@ -36,7 +35,6 @@ export default async function Home({ params }: Props) {
       <GallerySection dict={dict.gallery} />
       <CollectionSection dict={dict.collection} />
       <SirokSection lang={lang} />
-      <EditorialSection dict={dict.editorial} />
       <TestimonialsSection dict={dict.testimonials} />
       <FooterSection dict={dict.footer} lang={lang} />
     </main>

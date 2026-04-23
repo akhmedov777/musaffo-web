@@ -122,29 +122,40 @@ export function HeroSection({ dict }: { dict: Dictionary["hero"] }) {
               }}
             >
               <Image
-                src="https://images.unsplash.com/photo-1523473827533-2a64d0d36748?q=80&w=2000"
+                src="/image-hero.png"
                 alt="Musaffo"
                 fill
                 className="object-cover"
+                style={{ objectPosition: "center 56%" }}
                 priority
               />
 
+              <div className="absolute inset-0">
+                <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-[rgba(7,24,43,0.68)] via-[rgba(7,24,43,0.26)] to-transparent md:w-[42%]" />
+                <div className="absolute inset-x-0 top-0 h-[34%] bg-gradient-to-b from-[rgba(7,24,43,0.34)] to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 h-[16%] bg-gradient-to-t from-[rgba(7,24,43,0.18)] to-transparent" />
+              </div>
+
               {/* Overlay Text - Fades out first */}
               <div
-                className="absolute inset-0 flex items-center justify-center overflow-hidden"
+                className="absolute inset-0 flex items-start justify-start overflow-hidden px-6 pt-28 md:px-10 md:pt-36 lg:px-16 lg:pt-40"
                 style={{ opacity: textOpacity }}
               >
-                <div className="text-center px-6">
+                <div className="max-w-[18rem] text-white md:max-w-[28rem] lg:max-w-[34rem]">
                   <h1
-                    className="text-5xl md:text-7xl lg:text-8xl font-display leading-tight tracking-tight text-white animate-[slideUp_0.8s_ease-out_forwards] opacity-0"
+                    className="animate-[slideUp_0.8s_ease-out_forwards] text-5xl font-display leading-[0.92] tracking-tight text-white opacity-0 drop-shadow-[0_10px_35px_rgba(0,0,0,0.38)] md:text-6xl lg:text-7xl"
                     style={{ animationDelay: "0.2s" }}
                   >
                     {dict.title}
                     <br />
                     <em>{dict.titleLine2}</em>
                   </h1>
+                  <div
+                    className="mt-6 h-px w-20 animate-[slideUp_0.8s_ease-out_forwards] bg-white/45 opacity-0"
+                    style={{ animationDelay: "0.45s" }}
+                  />
                   <p
-                    className="mt-4 text-base md:text-lg text-white/70 animate-[slideUp_0.8s_ease-out_forwards] opacity-0"
+                    className="mt-5 max-w-[16rem] animate-[slideUp_0.8s_ease-out_forwards] text-sm leading-relaxed text-white/80 opacity-0 drop-shadow-[0_8px_24px_rgba(0,0,0,0.32)] md:max-w-[20rem] md:text-base lg:text-lg"
                     style={{ animationDelay: "0.6s" }}
                   >
                     {dict.subtitle}
